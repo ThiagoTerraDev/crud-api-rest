@@ -26,6 +26,13 @@ def seleciona_usuarios():
     
     return gera_response(200, "usuarios", usuarios_json, "ok")
 
+@app.route("/usuario/<id>", methods=["GET"])
+def seleciona_usuario(id):
+    usuario_objeto = Usuario.query.filter_by(id=id).first()
+    usuario_json = usuario_objeto.to_json()
+    
+    return gera_response(200, "usuario", usuario_json)
+
 
 def gera_response(status, nome_do_conteudo, conteudo, mensagem=False):
     body = {}
